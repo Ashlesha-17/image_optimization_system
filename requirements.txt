@@ -1,4 +1,7 @@
-setuptools==82.0.1
+setuptools==65.5.0
+wheel
+gunicorn
+Flask
 wheel>=0.40.0
 Flask==2.3.3
 requests==2.32.4
