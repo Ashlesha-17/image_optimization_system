@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Optimizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Smart Image Optimizer ☁️</h1>
+    <p>Upload any image and optimize it for social media or general use. Compare original vs optimized images and download instantly.</p>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+
+        <!-- Platform Selection -->
+        <select name="platform">
+            <option value="">General</option>
+            <option value="instagram">Instagram</option>
+            <option value="whatsapp">WhatsApp</option>
+        </select>
+
+        <!-- Format Selection -->
+        <select name="format">
+            <option value="jpeg">JPEG</option>
+            <option value="png">PNG</option>
+            <option value="webp">WebP</option>
+        </select>
+
+        <button type="submit">Upload & Optimize</button>
+    </form>
+
+    {% if suggestion %}
+        <p class="suggestion">{{ suggestion }}</p>
+    {% endif %}
+
+    {% if original_size %}
+        <p><b>Original Size:</b> {{ original_size }} KB</p>
+        <p><b>Optimized Size:</b> {{ optimized_size }} KB</p>
+        <p><b>Size Reduced:</b> {{ reduction }}%</p>
+    {% endif %}
+
+    <!-- 🔥 Slider Comparison -->
+    {% if original %}
+    <div class="slider-container">
+        <img src="{{ original }}" class="image-before">
+        <img src="{{ optimized }}" class="image-after" id="afterImage">
+    </div>
+    <p>Drag the slider to compare image quality</p>
+    <input type="range" min="0" max="100" value="50" id="slider">
+
+    <!-- ✅ Download Button -->
+    <a href="{{ url_for('download') }}?url={{ optimized }}" target="_blank">
+        <button class="download-btn">Download Optimized Image</button>
+    </a>
+    {% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
