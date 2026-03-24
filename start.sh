@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Upgrade pip, setuptools, and wheel to make sure pkg_resources is available
+# Upgrade pip, setuptools, wheel
 pip install --upgrade pip setuptools wheel
 
-# Install all packages from requirements.txt
+# Install all dependencies
 pip install -r requirements.txt
 
-# Start your Flask app using Gunicorn
+# Start Flask app with Gunicorn
 gunicorn app:app
